@@ -1,0 +1,96 @@
+body {
+  background: #1c1c1c;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif; }
+  body p {
+    font-size: 14px;
+    opacity: 0.7; }
+  body .juls_content {
+    margin-top: 150px;
+    min-height: calc(100vh - 150px);
+    border-left: 1px solid #ffe400;
+    position: relative;
+    padding-bottom: 150px; }
+    body .juls_content .juls_projects h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px; }
+    body .juls_content .juls_projects a {
+      color: #ffe400;
+      display: inline-block;
+      padding: 4px 25px;
+      border: 1px solid #ffe400;
+      border-radius: 15px;
+      font-size: 13px; }
+      body .juls_content .juls_projects a:hover {
+        text-decoration: none;
+        background: #ffe400;
+        color: #1c1c1c; }
+    body .juls_content .juls_about p {
+      max-width: 600px; }
+    body .juls_content .juls_circle_ {
+      border: 1px solid #ffe400;
+      height: 50px;
+      width: 50px;
+      border-radius: 1000px;
+      position: relative;
+      background: #1c1c1c;
+      margin-left: -160px;
+      position: absolute; }
+      body .juls_content .juls_circle_ span {
+        color: #FFF;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 700;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+    body .juls_content .juls_circle_main {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      margin-left: -195px;
+      top: 0; }
+      body .juls_content .juls_circle_main:before {
+        content: "JT";
+        color: #FFF;
+        font-size: 64px;
+        line-height: 64px;
+        font-weight: 700;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-45%, -50%); }
+    body .juls_content .juls_text {
+      margin-left: 150px;
+      padding-top: 25px; }
+      body .juls_content .juls_text p {
+        margin: 7px 0; }
+      body .juls_content .juls_text h1 {
+        margin-top: 0;
+        font-size: 35px;
+        text-transform: uppercase;
+        font-weight: 700; }
+      body .juls_content .juls_text h2 {
+        font-size: 20px;
+        font-weight: 300; }
+      body .juls_content .juls_text .h2 {
+        font-weight: 700;
+        margin-top: 15px; }
+      body .juls_content .juls_text .row {
+        margin-bottom: 100px; }
+      body .juls_content .juls_text .row:last-child {
+        margin-bottom: 0; }
+
+@media only screen and (max-width: 700px) {
+  .juls_text {
+    margin-left: 50px !important;
+    padding-top: 0 !important; }
+
+  .juls_projects .row {
+    margin-bottom: 0 !important; }
+    .juls_projects .row div {
+      margin: 15px 0 !important; } }
+
+/*# sourceMappingURL=style.css.map */
