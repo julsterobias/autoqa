@@ -57,7 +57,7 @@
             </div>
             <div class="col-md-9">
                 
-                <div class="goto-started doc-content">
+                <div class="goto-started doc-content active">
 
                     <h3>Method 1: Installing via WordPress Admin Dashboard</h3>
                     <ol>
@@ -403,8 +403,8 @@
 
             let target = $(this).attr('href');
             target = target.replace('#','.');
-            $('.doc-content').hide();
-            $(target).show();
+            $('.doc-content').removeClass('active');
+            $(target).addClass('active');
         });
     });
 </script>
