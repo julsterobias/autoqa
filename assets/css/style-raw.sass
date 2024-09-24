@@ -1,0 +1,242 @@
+@import values.sass
+
+html
+    padding: 0
+    margin: 0
+
+    body
+        font-family: $font
+        font-size: 16px
+        line-height: 22px
+
+        h1
+            font-size: 48px
+            font-weight: 900
+            margin: 0 auto
+            margin-bottom: 15px
+
+        .main-button
+            display: inline-block
+            background-color: $primary
+            color: white
+            padding: 15px 35px
+            border-radius: 100px
+            @include TransitionAll(0.5s)
+
+            &:hover
+                color: white
+                background-color: $primary-hover
+
+        .text-content
+            margin-bottom: $space-down
+
+            div:nth-child(2) 
+                img
+                    float: right
+
+            p
+                color: $text
+                line-height: 25px
+                text-align: justify
+
+            .content
+                position: relative
+                top: 50%
+                transform: translateY(-50%)
+
+        header
+            padding: 50px 0
+
+            .logo_container
+                max-width: 1300px
+                display: block
+                position: relative
+                margin: 0 auto
+
+            div.row
+                div:nth-child(2),
+                div:nth-child(3)
+                    position: relative
+
+                    ul
+                        position: absolute
+                        top: 50%
+                        left: 50%
+                        transform: translate(-50%, -50%)
+                        margin: 0
+                        padding: 0
+
+                        li
+                            list-style: none
+                            margin: 0
+
+                div:nth-child(3)
+                    ul
+                        position: relative
+                        top: 50%
+                        transform: translateY(-50%)
+                        right: 0
+                        left: 0
+
+                        li
+                            text-align: right
+
+        a
+            color: $secondary
+
+            &:hover
+                text-decoration: none
+                color: $primary
+
+
+        .hero_container
+            position: relative
+            height: auto
+
+            .container
+                position: relative
+                text-align: center
+                padding: $space-down 0           
+
+                h1
+                    margin-bottom: 40px
+
+                    span
+                        position: relative
+                        display: inline-block
+
+                    span:after
+                        content: " "
+                        position: absolute
+                        bottom: 5px
+                        left: 0
+                        right: 0
+                        height: 5px
+                        background-color: $primary
+
+                h3
+                    font-size: 19px
+                    color: $text
+                    line-height: 28px
+                    max-width: 800px
+                    margin: 0 auto
+
+                .hero_download
+                    margin-top: 40px
+
+                    div:nth-child(1)
+                        text-align: right
+
+                        a
+                            position: relative
+                            top: 50%
+                            transform: translateY(-50%)
+
+                    div:nth-child(2)
+                        text-align: left
+
+                        p
+                            position: relative
+                            top: 50%
+                            transform: translateY(-50%)
+
+
+        .divider
+            margin-bottom: $space-down
+            .container
+                position: relative
+                
+                div
+                    border-bottom: 1px solid $grey
+                
+                    &:after
+                        content: " "
+                        background-color: $grey
+                        width: 100px
+                        height: 5px
+                        position: absolute
+                        bottom: -3px
+                        left: 50%
+                        transform: translateX(-50%)
+
+
+
+        .stupid-quotes
+            background-color: $grey-light
+            padding: $space-down
+            margin-top: $space-down
+            margin-bottom: $space-down
+
+            p
+                max-width: 600px
+                margin: 0 auto
+                position: relative
+
+                &:nth-child(1)
+                    font-size: 20px
+                    line-height: 30px
+
+                &:nth-child(2)
+                    text-align: right
+                    margin-top: 30px
+                    margin-bottom: 0
+
+
+    footer
+        padding-bottom: $space-down
+
+        .container
+            .row
+                div:nth-child(1)
+                    a
+                        position: relative
+                        top: 50%
+                        transform: translateY(-50%)
+
+    .documentation
+        margin-bottom: $space-down
+
+        .doc-content
+            padding-left: 25px 
+
+        h1
+            margin-bottom: 50px
+
+        .doc-nav
+            margin: 0
+            padding: 0
+            position: sticky
+            top: 50px
+
+            li
+                list-style: none
+                margin: 0
+
+                a
+                    font-size: 18px
+                    display: block
+                    padding: 15px 0
+                    border-bottom: 1px solid $grey
+                    @include TransitionAll(0.3s)
+
+                    &:hover,
+                    &.active
+                        border-left: 5px solid $primary
+                        padding-left: 15px
+
+                &:first-child
+                    a
+                        border-top: 1px solid $grey
+
+        ol,
+        ul
+            li
+                margin: 15px 0
+
+        h3
+            font-size: 25px
+            margin-top: 50px
+            font-weight: 800
+
+            &:first-child
+                margin-top: 0

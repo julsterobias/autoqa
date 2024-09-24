@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url('Avenir-Medium.woff2') format('woff2'),
+        url('Avenir-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url('Avenir-Black.woff2') format('woff2'),
+        url('Avenir-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir LT Std';
+    src: url('AvenirLTStd-Roman.woff2') format('woff2'),
+        url('AvenirLTStd-Roman.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir LT Std';
+    src: url('AvenirLTStd-Light.woff2') format('woff2'),
+        url('AvenirLTStd-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir LT Std';
+    src: url('AvenirLTStd-Book.woff2') format('woff2'),
+        url('AvenirLTStd-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
