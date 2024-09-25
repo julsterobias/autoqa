@@ -178,12 +178,16 @@ html {
     html .documentation ol li,
     html .documentation ul li {
       margin: 15px 0; }
-    html .documentation h3 {
+    html .documentation h3,
+    html .documentation h2 {
       font-size: 25px;
       margin-top: 50px;
       font-weight: 800; }
-      html .documentation h3:first-child {
+      html .documentation h3:first-child,
+      html .documentation h2:first-child {
         margin-top: 0; }
+    html .documentation h2 {
+      font-size: 30px; }
     html .documentation .doc-content {
       display: none; }
       html .documentation .doc-content.active {
