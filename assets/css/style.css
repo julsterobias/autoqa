@@ -5,6 +5,8 @@ html {
     font-family: "Avenir", roboto, arial;
     font-size: 16px;
     line-height: 22px; }
+    html body img {
+      max-width: 100%; }
     html body h1 {
       font-size: 48px;
       font-weight: 900;
@@ -192,5 +194,62 @@ html {
       display: none; }
       html .documentation .doc-content.active {
         display: block; }
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 0 20px; }
+
+  header {
+    text-align: center;
+    padding-bottom: 40px !important; }
+
+  html body .hero_container .container .hero_download div:nth-child(1),
+  html body .hero_container .container .hero_download div:nth-child(2) {
+    text-align: center !important; }
+
+  html body .hero_container .container .hero_download div:nth-child(1) a {
+    margin-bottom: 20px;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: inline-block; }
+
+  html body header div.row div:nth-child(2) ul, html body header div.row div:nth-child(3) ul {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px; }
+
+  html body header div.row div:nth-child(3) ul li {
+    text-align: center; }
+
+  html body h1 {
+    font-size: 30px; }
+
+  html body .hero_container .container {
+    padding: 80px 0; }
+
+  html body .divider {
+    margin-bottom: 80px; }
+
+  .flows img {
+    margin-top: 20px; }
+
+  html body .text-content {
+    margin-bottom: 80px; }
+
+  html body .stupid-quotes {
+    padding: 40px;
+    margin: 80px 0; }
+
+  html footer .container .row div:nth-child(1) a {
+    top: auto;
+    transform: none;
+    margin-bottom: 40px; }
+
+  html .documentation .doc-content {
+    margin-top: 40px;
+    padding: 0; } }
 
 /*# sourceMappingURL=style.css.map */
