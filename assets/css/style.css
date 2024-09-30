@@ -37,6 +37,19 @@ html {
         position: relative;
         top: 50%;
         transform: translateY(-50%); }
+    html body .features div:nth-child(2) img {
+      float: none; }
+    html body .features .row {
+      text-align: center; }
+    html body .features .feature-content {
+      margin-top: 80px; }
+      html body .features .feature-content h3 {
+        font-size: 22px;
+        font-weight: 600; }
+      html body .features .feature-content figure {
+        height: 150px; }
+      html body .features .feature-content p {
+        text-align: center; }
     html body header {
       padding: 50px 0; }
       html body header .logo_container {
