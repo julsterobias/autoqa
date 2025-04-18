@@ -579,4 +579,33 @@ a {
   background-color: white;
   display: none; }
 
+.slick-arrow:first-child {
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  left: 20px; }
+
+.slick-arrow:last-child {
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  right: 20px; }
+
+.slick-arrow:active {
+  border: none;
+  outline: none; }
+
 /*# sourceMappingURL=style.css.map */

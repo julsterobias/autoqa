@@ -1,0 +1,268 @@
+html {
+  padding: 0;
+  margin: 0; }
+  html body {
+    font-family: "Avenir", roboto, arial;
+    font-size: 16px;
+    line-height: 22px; }
+    html body img {
+      max-width: 100%; }
+    html body h1 {
+      font-size: 48px;
+      font-weight: 900;
+      margin: 0 auto;
+      margin-bottom: 15px; }
+    html body .main-button {
+      display: inline-block;
+      background-color: #F25405;
+      color: white;
+      padding: 15px 35px;
+      border-radius: 100px;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease; }
+      html body .main-button:hover {
+        color: white;
+        background-color: #cf4602; }
+    html body .text-content {
+      margin-bottom: 120px; }
+      html body .text-content div:nth-child(2) img {
+        float: right; }
+      html body .text-content p {
+        color: #606060;
+        line-height: 25px;
+        text-align: justify; }
+      html body .text-content .content {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%); }
+    html body .features div:nth-child(2) img {
+      float: none; }
+    html body .features .row {
+      text-align: center; }
+    html body .features .feature-content {
+      margin-top: 80px; }
+      html body .features .feature-content h3 {
+        font-size: 22px;
+        font-weight: 600; }
+      html body .features .feature-content figure {
+        height: 150px; }
+      html body .features .feature-content p {
+        text-align: center; }
+    html body header {
+      padding: 50px 0; }
+      html body header .logo_container {
+        max-width: 1300px;
+        display: block;
+        position: relative;
+        margin: 0 auto; }
+      html body header div.row div:nth-child(2),
+      html body header div.row div:nth-child(3) {
+        position: relative; }
+        html body header div.row div:nth-child(2) ul,
+        html body header div.row div:nth-child(3) ul {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          margin: 0;
+          padding: 0; }
+          html body header div.row div:nth-child(2) ul li,
+          html body header div.row div:nth-child(3) ul li {
+            list-style: none;
+            margin: 0; }
+      html body header div.row div:nth-child(3) ul {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        left: 0; }
+        html body header div.row div:nth-child(3) ul li {
+          text-align: right; }
+    html body a {
+      color: #3A3A3A; }
+      html body a:hover {
+        text-decoration: none;
+        color: #F25405; }
+    html body .hero_container {
+      position: relative;
+      height: auto; }
+      html body .hero_container .container {
+        position: relative;
+        text-align: center;
+        padding: 120px 0; }
+        html body .hero_container .container h1 {
+          margin-bottom: 40px; }
+          html body .hero_container .container h1 span {
+            position: relative;
+            display: inline-block; }
+          html body .hero_container .container h1 span:after {
+            content: " ";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-color: #F25405; }
+        html body .hero_container .container h3 {
+          font-size: 19px;
+          color: #606060;
+          line-height: 28px;
+          max-width: 800px;
+          margin: 0 auto; }
+        html body .hero_container .container .hero_download {
+          margin-top: 40px; }
+          html body .hero_container .container .hero_download div:nth-child(1) {
+            text-align: right; }
+            html body .hero_container .container .hero_download div:nth-child(1) a {
+              position: relative;
+              top: 50%;
+              transform: translateY(-50%); }
+          html body .hero_container .container .hero_download div:nth-child(2) {
+            text-align: left; }
+            html body .hero_container .container .hero_download div:nth-child(2) p {
+              position: relative;
+              top: 50%;
+              transform: translateY(-50%); }
+    html body .divider {
+      margin-bottom: 120px; }
+      html body .divider .container {
+        position: relative; }
+        html body .divider .container div {
+          border-bottom: 1px solid #CCCCCC; }
+          html body .divider .container div:after {
+            content: " ";
+            background-color: #CCCCCC;
+            width: 100px;
+            height: 5px;
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%); }
+    html body .stupid-quotes {
+      background-color: #F2F2F2;
+      padding: 120px;
+      margin-top: 120px;
+      margin-bottom: 120px; }
+      html body .stupid-quotes p {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative; }
+        html body .stupid-quotes p:nth-child(1) {
+          font-size: 20px;
+          line-height: 30px; }
+        html body .stupid-quotes p:nth-child(2) {
+          text-align: right;
+          margin-top: 30px;
+          margin-bottom: 0; }
+  html footer {
+    padding-bottom: 120px; }
+    html footer .container .row div:nth-child(1) a {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%); }
+  html .documentation {
+    margin-bottom: 120px; }
+    html .documentation .doc-content {
+      padding-left: 25px; }
+    html .documentation h1 {
+      margin-bottom: 50px; }
+    html .documentation .doc-nav {
+      margin: 0;
+      padding: 0;
+      position: sticky;
+      top: 50px; }
+      html .documentation .doc-nav li {
+        list-style: none;
+        margin: 0; }
+        html .documentation .doc-nav li a {
+          font-size: 18px;
+          display: block;
+          padding: 15px 0;
+          border-bottom: 1px solid #CCCCCC;
+          -webkit-transition: all 0.3s ease;
+          -moz-transition: all 0.3s ease;
+          -o-transition: all 0.3s ease;
+          -ms-transition: all 0.3s ease; }
+          html .documentation .doc-nav li a:hover, html .documentation .doc-nav li a.active {
+            border-left: 5px solid #F25405;
+            padding-left: 15px; }
+        html .documentation .doc-nav li:first-child a {
+          border-top: 1px solid #CCCCCC; }
+    html .documentation ol li,
+    html .documentation ul li {
+      margin: 15px 0; }
+    html .documentation h3,
+    html .documentation h2 {
+      font-size: 25px;
+      margin-top: 50px;
+      font-weight: 800; }
+      html .documentation h3:first-child,
+      html .documentation h2:first-child {
+        margin-top: 0; }
+    html .documentation h2 {
+      font-size: 30px; }
+    html .documentation .doc-content {
+      display: none; }
+      html .documentation .doc-content.active {
+        display: block; }
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 0 20px; }
+
+  header {
+    text-align: center;
+    padding-bottom: 40px !important; }
+
+  html body .hero_container .container .hero_download div:nth-child(1),
+  html body .hero_container .container .hero_download div:nth-child(2) {
+    text-align: center !important; }
+
+  html body .hero_container .container .hero_download div:nth-child(1) a {
+    margin-bottom: 20px;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: inline-block; }
+
+  html body header div.row div:nth-child(2) ul, html body header div.row div:nth-child(3) ul {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px; }
+
+  html body header div.row div:nth-child(3) ul li {
+    text-align: center; }
+
+  html body h1 {
+    font-size: 30px; }
+
+  html body .hero_container .container {
+    padding: 80px 0; }
+
+  html body .divider {
+    margin-bottom: 80px; }
+
+  .flows img {
+    margin-top: 20px; }
+
+  html body .text-content {
+    margin-bottom: 80px; }
+
+  html body .stupid-quotes {
+    padding: 40px;
+    margin: 80px 0; }
+
+  html footer .container .row div:nth-child(1) a {
+    top: auto;
+    transform: none;
+    margin-bottom: 40px; }
+
+  html .documentation .doc-content {
+    margin-top: 40px;
+    padding: 0; } }
+
+/*# sourceMappingURL=style-raw.css.map */
