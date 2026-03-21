@@ -1,0 +1,278 @@
+<html>
+	<head>
+		<title>Run chicken run!</title>
+		<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+		<script>
+			const firebaseConfig = {
+				apiKey: "AIzaSyA7j5cwbeYuDvN9noLUARfnCYA1X7q8EFc",
+				authDomain: "ds-chat-system.firebaseapp.com",
+				databaseURL: "https://ds-chat-system.firebaseio.com",
+				projectId: "ds-chat-system",
+				storageBucket: "ds-chat-system.appspot.com",
+				messagingSenderId: "853002794624",
+				appId: "1:853002794624:web:0a723912b9b23f39431865"
+			};
+			firebase.initializeApp(firebaseConfig);
+
+			$(document).ready(function() {
+				$('#add_player').click(function() {
+					var playerName = $('.playerName').val();
+					var get_player_count = $('#gameData .raceTrack').length;
+					if (playerName) {
+						const db = firebase.database();
+							db.ref("run_chicken_run").push(
+									{
+										player_name: playerName,
+										pos: 0,
+										speed: 30,
+										direction: "forward",
+										image: "asset-idle.gif",
+										message: ''
+									}
+							).then(() => {
+								//do nothing
+							}).catch((error) => {
+								alert("Error:", error);
+							});
+						$('.playerName').val('');
+					}
+				});
+
+				$('#restart_game').click(function() {
+					const db = firebase.database();
+					db.ref("run_chicken_run").remove().then(() => {
+						//do nothing
+					}).catch((error) => {
+						alert("Error:", error);
+					});
+				});
+
+				$('#start_game').click(function() {
+					// Move the img to the right
+					const db = firebase.database();
+					const gameRef = db.ref("run_chicken_run");
+					$('.raceTrack .raceElement').each(function(index) {
+						var raceEl = $(this);
+						var parentWidth = raceEl.parent().width();
+						var imgWidth = raceEl.find('img').width();
+						var maxDistance = parentWidth - imgWidth; // max distance it can move
+
+						var cur_image = 'asset-idle.gif';
+						
+						var img = raceEl.find('img');
+						img.prop('src','asset-run.gif'); 
+						cur_image = 'asset-run.gif';
+			
+
+						var currentPos = 0; // starting position
+						var intervalTime = 100; // how often to update position (ms)
+						
+						var speeds = [28, 15, 0, 10, 30, 8, 25, 12, 0, 24, 20, 0]; // pixels per interval
+						var speedIndex = 0;
+
+						var directions = ["forward", "back", "forward", "forward", "forward", "forward"];
+						
+						var current_direction = "forward";
+
+						var message = '';
+
+						// change speed every 2 seconds
+						var speedChanger = setInterval(function() {
+							speedIndex = Math.floor(Math.random() * speeds.length);
+							if ( speeds[speedIndex] === 0 ) {
+								img.prop('src','asset-idle.gif'); // change to idle if speed is 0
+								cur_image = 'asset-idle.gif';
+								message = 'I need a break!';
+							} else {
+								img.prop('src','asset-run.gif'); // change to run if speed is > 0
+								cur_image = 'asset-run.gif';
+								message = '';
+							}
+
+							direction_index = Math.floor(Math.random() * directions.length);
+							current_direction = directions[direction_index];
+							if ( directions[direction_index] === "back" && speeds[speedIndex] > 0 ) {
+								img.prop('src','asset-run-back.gif');
+								cur_image = 'asset-run-back.gif';
+								message = 'F*** this!';
+							}
+
+							if ( directions[direction_index] === "back" && speeds[speedIndex] === 0 ) {
+								img.prop('src','asset-idle-back.gif');
+								cur_image = 'asset-idle-back.gif';
+								message = 'What\'s that?';
+							}
+
+						}, 2000);
+
+						var anim = setInterval(function() {
+							if ( current_direction === 'forward' ) {
+								currentPos += speeds[speedIndex] * (intervalTime / 1000); // move according to current speed
+							} else if ( current_direction === 'back' ) {
+								currentPos -= ( speeds[speedIndex] * (intervalTime / 1000) ) * 2; // move backwards according to current speed
+								if (currentPos < 0) currentPos = 0; // don't go past start
+							}
+							currentPos += speeds[speedIndex] * (intervalTime / 1000); // move according to current speed
+							if(currentPos >= maxDistance){
+								currentPos = maxDistance;
+								clearInterval(anim);
+								clearInterval(speedChanger);
+								img.prop('src','asset-idle.gif'); // change to idle at end
+								cur_image = 'asset-idle.gif';
+								message = 'I made it!';
+							}
+
+							// Update the position in Firebase
+							const chickID = raceEl.data('id');
+							gameRef.child(chickID).set({
+								pos: currentPos,
+								speed: speeds[speedIndex],
+								direction: current_direction,
+								image: cur_image,
+								message: message
+							});
+
+							raceEl.css('left', currentPos + 'px');
+						}, intervalTime);
+
+					});
+				});
+
+			});
+
+			LoadDataFromFirebase();
+
+			function LoadDataFromFirebase() {
+				const db = firebase.database();
+				const gameRef = db.ref("run_chicken_run");
+				gameRef.on("value", (snapshot) => {
+					const data = snapshot.val();
+
+					const container = document.getElementById("gameData");
+					container.innerHTML = ""; // clear old data
+
+					if (data) {
+						Object.keys(data).forEach((key) => {
+							const player = data[key];
+
+							const div = document.createElement("div");
+							let message_status = (player.message != '') ? 'active' : '';
+							div.innerHTML = `
+							<div class="raceTrack">
+								<div class="raceElement" data-id="${key}" style="left: ${player.pos}px;">
+									<span class="chickBubble ${message_status}">${player.message}</span>
+									<img src="${player.image}" data-name="${player.player_name}" width="40">
+								</div>
+							</div>
+							`;
+							container.appendChild(div);
+						});
+					}
+				});
+			}
+			
+
+		</script>
+
+		<style>
+			body, html {
+				font-family: "Pixelify Sans", sans-serif;
+				padding: 0;
+				margin: 0;
+				background: #66EB3D;
+			}
+			header {
+				padding: 20px;
+				backdrop-filter: blur(2px); /* Apply the blur effect */
+  				-webkit-backdrop-filter: blur(2px);
+			}
+
+			header h1 {
+				margin: 0;
+			}
+			.playerName {
+				padding: 10px;
+				font-size: 16px;
+				font-family: "Pixelify Sans", sans-serif;	
+				border-radius: 50px;
+				border: 0;
+			}
+			button {
+				padding: 10px 20px;
+				font-size: 16px;
+				margin-left: 10px;
+				font-family: "Pixelify Sans", sans-serif;
+			}
+			#gameData {
+				padding: 20px 0;
+				max-width: 1500px;
+				margin: 0 auto;
+			}
+			.button {
+				border: 0;
+				border-radius: 50px;
+				cursor: pointer;
+			}
+			#start_game {
+				background-color: #4287f5;
+				color: white;
+				float: right;
+			}
+			.raceTrack {
+				position: relative;
+				height: 60px;
+				border-bottom: 1px #58D232 solid;
+			}
+
+			.raceTrack .raceElement {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.chickBubble {
+				position: absolute;
+				top: 50%;
+				left: 50px;
+				transform: translateY(-50%);
+				background-color: white;
+				padding: 5px 10px;
+				border-radius: 10px;
+				font-size: 12px;
+				white-space: nowrap;
+				display: none;
+			}
+
+			.chickBubble.active {
+				display: block;
+			}
+			.chickBubble:before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: -10px;
+				transform: translateY(-50%);
+				border-width: 5px;
+				border-style: solid;
+				border-color: transparent white transparent transparent;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<input type="text" class="playerName" placeholder="Player Name">
+			<button id="add_player" class="button">Add Player</button><button id="restart_game" class="button">Clear Game</button><button id="reset_game" class="button">Reset Game</button><button id="start_game" class="button">Start Game</button>
+		</header>
+		
+		<!-- Game goes here -->
+		<div id="gameData"></div>
+		
+	</body>
+</html>
