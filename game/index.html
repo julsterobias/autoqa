@@ -21,10 +21,46 @@
 			};
 			firebase.initializeApp(firebaseConfig);
 
+			const start_messages = [
+				"Let's go!",
+				"I'm feeling good!",
+				"Here we go!",
+				"Time to run!",
+				"Let's do this!",
+				"I didn't sign up for this...",
+				"Why am I running?",
+				"Is this really necessary?",
+				"I'm just here for the snacks.",
+				"I wanna go home.",
+				"Can we just walk?",
+				"Do I get a medal for this?",
+				"Is there a finish line?",
+				"The developer sucks!"
+			];
+
 			$(document).ready(function() {
-				$('#add_player').click(function() {
+
+				//get URL parameters
+				const urlParams = new URLSearchParams(window.location.search);
+				const isAdmin = urlParams.get('is_admin');
+
+				if ( !isAdmin ) {
+					$('.adminControl').hide();
+					$('#start_game').hide();
+					$('.screenHero').show();
+				}
+
+				$('#add_player, #joinGame').click(function() {
+
+					let getCurrentID = $(this).attr('id');
+
 					var playerName = $('.playerName').val();
 					var get_player_count = $('#gameData .raceTrack').length;
+
+					 if ( getCurrentID === 'joinGame' ) {
+						playerName = $('#playerNameUser').val();
+					 }
+
 					if (playerName) {
 						const db = firebase.database();
 							db.ref("run_chicken_run").push(
@@ -34,7 +70,7 @@
 										speed: 30,
 										direction: "forward",
 										image: "asset-idle.gif",
-										message: ''
+										message: start_messages[Math.floor(Math.random() * start_messages.length)]
 									}
 							).then(() => {
 								//do nothing
@@ -43,6 +79,8 @@
 							});
 						$('.playerName').val('');
 					}
+
+					$('.screenHero').hide();
 				});
 
 				$('#restart_game').click(function() {
@@ -52,6 +90,12 @@
 					}).catch((error) => {
 						alert("Error:", error);
 					});
+					db.ref("Results").remove().then(() => {
+						//do nothing
+					}).catch((error) => {
+						alert("Error:", error);
+					});
+					$('#raceResult').html('');
 				});
 
 				$('#start_game').click(function() {
@@ -74,7 +118,7 @@
 						var currentPos = 0; // starting position
 						var intervalTime = 100; // how often to update position (ms)
 						
-						var speeds = [28, 15, 0, 10, 30, 8, 25, 12, 0, 24, 20, 0]; // pixels per interval
+						var speeds = [25, 12, 0, 7, 27, 5, 22, 9, 0, 21, 17, 0]; // pixels per interval
 						var speedIndex = 0;
 
 						var directions = ["forward", "back", "forward", "forward", "forward", "forward"];
@@ -127,11 +171,15 @@
 								img.prop('src','asset-idle.gif'); // change to idle at end
 								cur_image = 'asset-idle.gif';
 								message = 'I made it!';
+
+								addLeaderBoard(raceEl.find('img').data('name'));
+
 							}
 
 							// Update the position in Firebase
 							const chickID = raceEl.data('id');
 							gameRef.child(chickID).set({
+								player_name: raceEl.find('img').data('name'),
 								pos: currentPos,
 								speed: speeds[speedIndex],
 								direction: current_direction,
@@ -144,6 +192,38 @@
 
 					});
 				});
+
+				$('#reset_game').click(function() {
+					const db = firebase.database();
+					const gameRef = db.ref("run_chicken_run");
+					gameRef.once("value", (snapshot) => {
+						const data = snapshot.val();
+						if (data) {
+							Object.keys(data).forEach((key) => {
+								gameRef.child(key).set({
+									player_name: data[key].player_name,
+									pos: 0,
+									speed: 30,
+									direction: "forward",
+									image: "asset-idle.gif",
+									message: start_messages[Math.floor(Math.random() * start_messages.length)]
+								});
+							});
+						}
+					});
+					db.ref("Results").remove().then(() => {
+						//do nothing
+					}).catch((error) => {
+						alert("Error:", error);
+					});
+					$('#raceResult').html('');
+				});
+
+				$('#hideHero').click(function() {
+					$('.screenHero').hide();
+				});
+
+			
 
 			});
 
@@ -166,6 +246,7 @@
 							let message_status = (player.message != '') ? 'active' : '';
 							div.innerHTML = `
 							<div class="raceTrack">
+								<span class="playerNameLabel">${player.player_name}</span>
 								<div class="raceElement" data-id="${key}" style="left: ${player.pos}px;">
 									<span class="chickBubble ${message_status}">${player.message}</span>
 									<img src="${player.image}" data-name="${player.player_name}" width="40">
@@ -177,99 +258,62 @@
 					}
 				});
 			}
-			
 
+			function addLeaderBoard(winnerName) {
+				const db = firebase.database();
+				const leaderboardRef = db.ref("Results");
+				leaderboardRef.push({
+					name: winnerName
+				});
+			}
+
+			LoadLeaderBoard();
+
+			function LoadLeaderBoard() {
+				const db = firebase.database();
+				const leaderboardRef = db.ref("Results");
+				leaderboardRef.on("value", (snapshot) => {
+					const data = snapshot.val();
+					const container = document.getElementById("raceResult");
+					container.innerHTML = ""; // clear old data
+					if (data) {
+						let rank_num = 0;
+						
+						Object.keys(data).forEach((key) => {
+							const entry = data[key];
+							const div = document.createElement("span");
+							rank_num++;
+							div.textContent = `${rank_num}. ${entry.name}`;
+							container.appendChild(div);
+						});
+					}
+				});
+			}
 		</script>
-
-		<style>
-			body, html {
-				font-family: "Pixelify Sans", sans-serif;
-				padding: 0;
-				margin: 0;
-				background: #66EB3D;
-			}
-			header {
-				padding: 20px;
-				backdrop-filter: blur(2px); /* Apply the blur effect */
-  				-webkit-backdrop-filter: blur(2px);
-			}
-
-			header h1 {
-				margin: 0;
-			}
-			.playerName {
-				padding: 10px;
-				font-size: 16px;
-				font-family: "Pixelify Sans", sans-serif;	
-				border-radius: 50px;
-				border: 0;
-			}
-			button {
-				padding: 10px 20px;
-				font-size: 16px;
-				margin-left: 10px;
-				font-family: "Pixelify Sans", sans-serif;
-			}
-			#gameData {
-				padding: 20px 0;
-				max-width: 1500px;
-				margin: 0 auto;
-			}
-			.button {
-				border: 0;
-				border-radius: 50px;
-				cursor: pointer;
-			}
-			#start_game {
-				background-color: #4287f5;
-				color: white;
-				float: right;
-			}
-			.raceTrack {
-				position: relative;
-				height: 60px;
-				border-bottom: 1px #58D232 solid;
-			}
-
-			.raceTrack .raceElement {
-				position: absolute;
-				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
-			}
-			.chickBubble {
-				position: absolute;
-				top: 50%;
-				left: 50px;
-				transform: translateY(-50%);
-				background-color: white;
-				padding: 5px 10px;
-				border-radius: 10px;
-				font-size: 12px;
-				white-space: nowrap;
-				display: none;
-			}
-
-			.chickBubble.active {
-				display: block;
-			}
-			.chickBubble:before {
-				content: "";
-				position: absolute;
-				top: 50%;
-				left: -10px;
-				transform: translateY(-50%);
-				border-width: 5px;
-				border-style: solid;
-				border-color: transparent white transparent transparent;
-			}
-		</style>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+
+		<div class="screenHero">
+			<div class="screenHero_con">
+				<img src="asset-run.gif">
+				<span class="gameTitle">Run Chicken Run!</span>
+				<span class="gameDesc">By Juls Terobias</span>
+				<div>
+					<input type="text" id="playerNameUser" placeholder="Player Name">
+					<button class="button" id="joinGame">Join Game</button>
+				</div>
+			</div>
+		</div>
+
 		<header>
-			<input type="text" class="playerName" placeholder="Player Name">
-			<button id="add_player" class="button">Add Player</button><button id="restart_game" class="button">Clear Game</button><button id="reset_game" class="button">Reset Game</button><button id="start_game" class="button">Start Game</button>
+			<div class="adminControl">
+				<input type="text" class="playerName" placeholder="Player Name">
+				<button id="add_player" class="button">Add Player</button><button id="restart_game" class="button">Clear Game</button><button id="reset_game" class="button">Reset Game</button><button id="start_game" class="button">Start Game</button>
+			</div>
+			<div class="raceResultWrapper"><span id="raceResult"></span></div>
 		</header>
+		
 		
 		<!-- Game goes here -->
 		<div id="gameData"></div>

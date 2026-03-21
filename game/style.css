@@ -1,0 +1,165 @@
+body, html {
+				font-family: "Pixelify Sans", sans-serif;
+				padding: 0;
+				margin: 0;
+				background: #66EB3D;
+			}
+			header {
+				padding: 20px;
+				backdrop-filter: blur(2px); /* Apply the blur effect */
+  				-webkit-backdrop-filter: blur(2px);
+				position: sticky;
+				top: 0;
+				background: #66EB3D;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+			.playerName {
+				padding: 10px;
+				font-size: 16px;
+				font-family: "Pixelify Sans", sans-serif;	
+				border-radius: 50px;
+				border: 0;
+			}
+			.playerNameLabel {
+				font-weight: bold;
+				font-size: 18px;
+				position: absolute;
+				left: -170px;
+				width: 150px;
+				top: 50%;
+				transform: translateY(-50%);
+				text-overflow: ellipsis;
+				overflow: hidden;
+    			white-space: nowrap;
+				text-align: right;
+			}
+			button {
+				padding: 10px 20px;
+				font-size: 16px;
+				margin-left: 10px;
+				font-family: "Pixelify Sans", sans-serif;
+			}
+			#gameData {
+				padding: 20px 0;
+				max-width: 1500px;
+				margin: 0 auto;
+			}
+			.button {
+				border: 0;
+				border-radius: 50px;
+				cursor: pointer;
+			}
+			#start_game {
+				background-color: #4287f5;
+				color: white;
+				float: right;
+			}
+
+			#start_game:disabled {
+				background-color: #a0c4f5;
+				cursor: not-allowed;
+			}
+			.raceTrack {
+				position: relative;
+				height: 60px;
+				border-bottom: 1px #58D232 solid;
+			}
+
+			.raceTrack .raceElement {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.chickBubble {
+				position: absolute;
+				top: 50%;
+				left: 50px;
+				transform: translateY(-50%);
+				background-color: white;
+				padding: 5px 10px;
+				border-radius: 10px;
+				font-size: 12px;
+				white-space: nowrap;
+				display: none;
+			}
+
+			.chickBubble.active {
+				display: block;
+			}
+			.chickBubble:before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: -10px;
+				transform: translateY(-50%);
+				border-width: 5px;
+				border-style: solid;
+				border-color: transparent white transparent transparent;
+			}
+			#raceResult span{
+				display: inline-block;
+				padding: 3px 5px;
+				font-size: 14px;
+				background-color: rgba(255, 255, 255, 0.8);
+				border-radius: 20px;
+				margin-right: 5px;
+			}
+			.adminControl {
+				margin-bottom: 10px;
+			}
+
+			.screenHero {
+				position: absolute;
+				z-index: 999;
+				text-align: center;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				display: none;
+				backdrop-filter: blur(5px); /* Apply the blur effect */
+  				-webkit-backdrop-filter: blur(5px);
+			}
+
+			.screenHero_con {
+				position: absolute;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -40%);
+				padding: 30px;
+				border-radius: 20px;
+				width: 700px;
+				box-sizing: border-box;
+			}
+
+			.screenHero .gameTitle {
+				display: block;
+   				font-size: 60px;
+				text-shadow: 2px 2px 0 #9732a8, 4px 4px 0 #a0c4f5, 6px 6px 0 #000;
+				margin-bottom: 10px;
+			}
+
+
+
+			.screenHero button {
+				margin: 0 auto;
+				margin-top: 10px;
+				margin-left: 5px;
+			}
+
+			#playerNameUser {
+				padding: 10px 15px;
+				font-size: 16px;
+				font-family: "Pixelify Sans", sans-serif;	
+				border-radius: 50px;
+				border: 0;
+				margin-top: 15px;
+			}
+
+			#playerNameUser:focus {
+				outline: none;
+			}
