@@ -73,6 +73,7 @@ body, html {
 				left: 0;
 				top: 50%;
 				transform: translateY(-50%);
+				z-index: 99;
 			}
 			.chickBubble {
 				position: absolute;
@@ -162,4 +163,12 @@ body, html {
 
 			#playerNameUser:focus {
 				outline: none;
+			}
+
+			.finishLine {
+				position: absolute;
+				right: -35px;
+				bottom: 10px;
+				width: 22px;
+				z-index: 1;
 			}
