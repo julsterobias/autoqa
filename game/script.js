@@ -90,6 +90,8 @@ const firebaseConfig = {
 
 				$('#start_game').click(function() {
 					// Move the img to the right
+					playMusic();
+
 					const db = firebase.database();
 					const gameRef = db.ref("run_chicken_run");
 					$('.raceTrack .raceElement').each(function(index) {
@@ -237,6 +239,28 @@ const firebaseConfig = {
 
 			});
 
+			function isPlaying(audio) {
+				return !audio.paused && !audio.ended && audio.currentTime > 0;
+			}
+
+			
+			function playMusic(mode = 'play') {
+				const audio = document.getElementById('bgmusic');
+				audio.volume = 0.5;
+
+				switch(mode) {
+					case 'play':
+						if ( !isPlaying(audio) ) {
+							audio.play();
+						}
+						break;
+					default:
+						audio.pause();
+						audio.currentTime = 0;
+						break
+				}
+			}
+
 			LoadDataFromFirebase();
 
 			function LoadDataFromFirebase() {
@@ -276,6 +300,14 @@ const firebaseConfig = {
 				leaderboardRef.push({
 					name: winnerName
 				});
+
+				//get leaderboard count elements using jquery
+				const leaderboardCount = $('#raceResult span').length;
+				const playercount = $('#gameData .raceTrack').length;
+
+				if ( leaderboardCount >= playercount ) {
+					playMusic('stop');
+				}
 			}
 
 			LoadLeaderBoard();
