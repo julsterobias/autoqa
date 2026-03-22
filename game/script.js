@@ -86,11 +86,11 @@ const firebaseConfig = {
 						alert("Error:", error);
 					});
 					$('#raceResult').html('');
+					playMusic('stop');
 				});
 
 				$('#start_game').click(function() {
 					// Move the img to the right
-					playMusic();
 
 					const db = firebase.database();
 					const gameRef = db.ref("run_chicken_run");
@@ -110,7 +110,7 @@ const firebaseConfig = {
 						var currentPos = 0; // starting position
 						var intervalTime = 100; // how often to update position (ms)
 						
-						var speeds = [25, 12, 0, 7, 27, 5, 22, 9, 0, 12, 17, 0]; // pixels per interval
+						var speeds = [25, 12, 0, 7, 27, 5, 22, 9, 12, 17, 0]; // pixels per interval
 						var speedIndex = 0;
 
 						var directions = ["forward", "back", "forward", "forward", "forward", "forward"];
@@ -229,6 +229,7 @@ const firebaseConfig = {
 						alert("Error:", error);
 					});
 					$('#raceResult').html('');
+					playMusic('stop');
 				});
 
 				$('#hideHero').click(function() {
@@ -246,12 +247,11 @@ const firebaseConfig = {
 			
 			function playMusic(mode = 'play') {
 				const audio = document.getElementById('bgmusic');
-				audio.volume = 0.5;
-
 				switch(mode) {
 					case 'play':
 						if ( !isPlaying(audio) ) {
 							audio.play();
+							audio.volume = 0.5;
 						}
 						break;
 					default:
@@ -266,6 +266,7 @@ const firebaseConfig = {
 			function LoadDataFromFirebase() {
 				const db = firebase.database();
 				const gameRef = db.ref("run_chicken_run");
+				var isplayed = false;
 				gameRef.on("value", (snapshot) => {
 					const data = snapshot.val();
 
@@ -275,6 +276,11 @@ const firebaseConfig = {
 					if (data) {
 						Object.keys(data).forEach((key) => {
 							const player = data[key];
+							
+							if ( player.pos > 0 && !isplayed ) {
+								playMusic();
+								isplayed = true;
+							}
 
 							const div = document.createElement("div");
 							let message_status = (player.message != '') ? 'active' : '';
